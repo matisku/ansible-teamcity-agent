@@ -1,0 +1,4 @@
+---
+teamcity_agent_server_url: localhost
+teamcity_agent_server_port: 8111
+teamcity_agent_install_dir: /opt/buildAgent

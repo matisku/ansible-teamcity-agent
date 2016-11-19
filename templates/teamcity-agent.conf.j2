@@ -1,0 +1,27 @@
+description "TeamCity Agent"
+
+start on runlevel [2345]
+stop on runlevel [016]
+
+# TeamCity can take a while to shutdown
+kill timeout 30
+
+respawn
+
+pre-start script
+
+  [ ! -f /etc/default/teamcity-agent ] && { stop; exit 0; }
+
+  . /etc/default/teamcity-agent
+
+  [ "$TEAMCITY_AGENT_ENABLED" != "yes" ] && { stop; exit 0; }
+  
+  exit 0 
+end script
+
+script
+  . /etc/default/teamcity-agent
+
+  exec start-stop-daemon --start -c {{ teamcity_agent_user }} --exec "${TEAMCITY_AGENT_PATH}/bin/agent.sh" -- run
+  
+end script

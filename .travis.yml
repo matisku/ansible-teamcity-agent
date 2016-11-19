@@ -1,0 +1,37 @@
+---
+language: python
+python: "3.5"
+
+# Use Ubunt 14.04
+sudo: required
+dist: trusty
+
+# Install pip
+addons:
+  apt:
+    packages:
+    - python-pip
+
+install:
+  # Install ansible
+  - pip2 install ansible
+
+  # Check ansible version
+  - ansible --version
+
+  # Setup Env
+  - mkdir -vp roles/ansible-teamcity-server
+  - ansible-galaxy install --roles-path roles ansiblebit.oracle-java
+  - mv -v README.md defaults handlers meta tasks templates vars roles/ansible-teamcity-server
+  - mv ansible.cfg tests
+
+script:
+  - cd tests
+  - ansible-playbook ./test.yml -i inventory --syntax-check
+  - ansible-playbook -i inventory ./test.yml
+
+after_script:
+  - cat /opt/TeamCity/logs/teamcity-server.log
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

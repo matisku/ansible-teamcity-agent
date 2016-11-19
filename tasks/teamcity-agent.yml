@@ -1,0 +1,63 @@
+---
+- name: "Download Agent Package"
+  get_url:
+    url: "http://{{ teamcity_agent_server_url }}:{{ teamcity_agent_server_port }}/update/buildAgent.zip"
+    dest: /tmp
+
+- name: "Install dependencies"
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+       - zip
+
+- name: "Create Agent Build dir"
+  file:
+    path: "{{ teamcity_agent_install_dir }}"
+    state: directory
+    owner: "{{ teamcity_agent_user }}"
+    group: "{{ teamcity_agent_group }}"
+    mode: 0755
+
+- name: "Unpack distribution"
+  unarchive:
+    src: "/tmp/buildAgent.zip"
+    dest: "{{ teamcity_agent_install_dir }}"
+    owner: "{{ teamcity_agent_user }}"
+    group: "{{ teamcity_agent_group }}"
+    copy: "no"
+
+- name: "Add TeamCity Agent service default config"
+  template:
+    src: "teamcity-agent.j2"
+    dest: "/etc/default/teamcity-agent"
+    mode: 0644
+
+- name: "Put TeamCity Agent service file"
+  template:
+    src: "teamcity-agent.conf.j2"
+    dest: "/etc/init/teamcity-agent.conf"
+    mode: 0644
+
+- name: "Add TeamCity Agent configuration"
+  template:
+    src: "buildAgent.properties.j2"
+    dest: "{{ teamcity_agent_install_dir }}/conf/buildAgent.properties"
+    owner: "{{ teamcity_agent_user }}"
+    group: "{{ teamcity_agent_group }}"
+    mode: 0644
+
+- name: "Create log dir"
+  file:
+    path: "{{ teamcity_agent_install_dir }}/logs"
+    state: directory
+    owner: "{{ teamcity_agent_user }}"
+    group: "{{ teamcity_agent_group }}"
+    mode: 0755
+
+- name: "Ensure TeamCity Agent is running"
+  service:
+    name: teamcity-agent
+    state: started
+    enabled: yes
