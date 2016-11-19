@@ -33,7 +33,7 @@ Example playbook:
 ```yaml
 - hosts: teamcity-agent
   roles:
-    - matisq.teamcity-agent
+    - matisku.teamcity-agent
 ```
 
 ## Author Information
