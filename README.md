@@ -30,5 +30,11 @@ Example playbook:
 ```yaml
 - hosts: agents
   roles:
-    - teamcity-agent
+    - matisq.teamcity-agent
 ```
+
+## Author Information
+----------------
+
+This role was created in 2016 by Mateusz Trojak for [Brainly](http://www.brainly.com).
+We are using this role for company CI automation with easy failover mechanism.
