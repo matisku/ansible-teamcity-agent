@@ -2,6 +2,7 @@ TeamCity Agent
 =========
 
 This role will install and configure TemCity Agent - CI tool from Jetbrains.
+Feel free to use it along with my TeamCity Server role - [matisku.teamcity-server](https://github.com/matisku/ansible-teamcity-server).
 
 Requirements
 ------------
