@@ -31,7 +31,7 @@ Example Playbook
 Example playbook:
 
 ```yaml
-- hosts: agents
+- hosts: teamcity-agent
   roles:
     - matisq.teamcity-agent
 ```
