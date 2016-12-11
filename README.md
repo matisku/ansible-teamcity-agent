@@ -41,3 +41,7 @@ Example playbook:
 
 This role was created in 2016 by Mateusz Trojak for [Brainly](http://www.brainly.com).
 We are using this role for company CI automation with easy scaling if needed.
+
+## License
+----------------
+Copyright © 2016 Mateusz Trojak. See LICENSE for details.
