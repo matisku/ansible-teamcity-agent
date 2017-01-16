@@ -14,16 +14,18 @@ Requirements
 Role Variables
 --------------
 
-| Variable name              | Default value    | Description                      |
-|----------------------------|------------------|----------------------------------|
-| teamcity_agent_server_url  |  localhost       | TeamCity Server URL              |
-| teamcity_agent_server_port |  8111            | TeamCity Server Port             |
-| teamcity_agent_install_dir |  /opt/buildAgent | TeamCity Agent Install Dir       |
+| Variable name               | Default value      | Description                |
+|-----------------------------|--------------------|----------------------------|
+| teamcity_agent_server_url   |  `localhost`       | TeamCity Server URL        |
+| teamcity_agent_server_port  |  `8111`            | TeamCity Server Port       |
+| teamcity_agent_install_dir  |  `/opt/buildAgent` | TeamCity Agent Install Dir |
+| teamcity_server_user_name   | `teamcity`         | Teamcity Adminin User      |
+| teamcity_server_user_passwd | `teamcity`         | Teamcity Admin Password    |
 
 Dependencies
 ------------
 
-This role depends on 'java' and 'docker' role.
+This role depends on 'java' role.
 
 Example Playbook
 ----------------
