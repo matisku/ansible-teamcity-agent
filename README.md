@@ -10,6 +10,7 @@ Requirements
 ------------
 
 1. `teamcity-server` - TeamCity Server
+2. [ansiblebit.oracle-java](https://github.com/ansiblebit/oracle-java) - Java is required on TeamCity Agent
 
 Role Variables
 --------------
