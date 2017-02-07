@@ -25,7 +25,7 @@ Role Variables
 Dependencies
 ------------
 
-This role depends on 'java' role.
+This role depends on `java` role.
 
 Example Playbook
 ----------------
