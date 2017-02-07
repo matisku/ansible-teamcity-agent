@@ -6,15 +6,11 @@ TeamCity Agent
 This role will install and configure TeamCity Agent for TeamCity Server - CI tool from Jetbrains.
 Feel free to use it along with my TeamCity Server role - [matisku.teamcity-server](https://github.com/matisku/ansible-teamcity-server).
 
-Requirements
-------------
-
+## Requirements
 1. `teamcity-server` - TeamCity Server
 2. [ansiblebit.oracle-java](https://github.com/ansiblebit/oracle-java) - Java is required on TeamCity Agent
 
-Role Variables
---------------
-
+## Role Variables
 | Variable name               | Default value      | Description                |
 |-----------------------------|--------------------|----------------------------|
 | teamcity_agent_server_url   |  `localhost`       | TeamCity Server URL        |
@@ -23,14 +19,10 @@ Role Variables
 | teamcity_server_user_name   | `teamcity`         | Teamcity Adminin User      |
 | teamcity_server_user_passwd | `teamcity`         | Teamcity Admin Password    |
 
-Dependencies
-------------
-
+## Dependencies
 This role depends on `java` role.
 
-Example Playbook
-----------------
-
+## Example Playbook
 Example playbook:
 
 ```yaml
@@ -40,11 +32,8 @@ Example playbook:
 ```
 
 ## Author Information
-----------------
-
 This role was created in 2016 by Mateusz Trojak for [Brainly](http://www.brainly.com).
 We are using this role for company CI automation with easy scaling if needed.
 
 ## License
-----------------
 Copyright © 2017 Mateusz Trojak. See LICENSE for details.
