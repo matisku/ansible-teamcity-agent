@@ -9,7 +9,7 @@ Feel free to use it along with my TeamCity Server role - [matisku.teamcity-serve
 Requirements
 ------------
 
-1. 'teamcity-server' - TeamCity Server
+1. `teamcity-server` - TeamCity Server
 
 Role Variables
 --------------
