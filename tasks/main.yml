@@ -1,3 +1,3 @@
 ---
-- include: create-teamcity-user.yml
+- include: setup-teamcity-user.yml
 - include: teamcity-agent.yml
