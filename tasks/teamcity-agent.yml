@@ -3,6 +3,9 @@
   get_url:
     url: "http://{{ teamcity_agent_server_url }}:{{ teamcity_agent_server_port }}/update/buildAgent.zip"
     dest: /tmp
+    validate_certs: no
+    timeout: 60
+  register: _teamcity_agent_package
 
 - name: "Install dependencies"
   apt:
@@ -27,6 +30,7 @@
     owner: "{{ teamcity_agent_user }}"
     group: "{{ teamcity_agent_group }}"
     copy: "no"
+  when: _teamcity_agent_package|changed
 
 - name: "Add TeamCity Agent service default config"
   template:
@@ -39,6 +43,11 @@
     src: "teamcity-agent.conf.j2"
     dest: "/etc/init/teamcity-agent.conf"
     mode: 0644
+
+- name: "Save agent auth token"
+  shell: "grep authorizationToken {{ teamcity_agent_install_dir }}/conf/buildAgent.properties | sed 's/authorizationToken=//g'"
+  changed_when: no
+  register: _teamcity_agent_token
 
 - name: "Add TeamCity Agent configuration"
   template:

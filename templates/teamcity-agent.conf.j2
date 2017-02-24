@@ -8,6 +8,15 @@ kill timeout 30
 
 respawn
 
+setuid teamcity
+setgid teamcity
+
+pre-stop script
+
+  exec "${TEAMCITY_AGENT_PATH}/bin/agent.sh" stop
+
+end script
+
 pre-start script
 
   [ ! -f /etc/default/teamcity-agent ] && { stop; exit 0; }
@@ -22,7 +31,7 @@ end script
 script
   . /etc/default/teamcity-agent
 
-  exec start-stop-daemon --start -c {{ teamcity_agent_user }} --exec "${TEAMCITY_AGENT_PATH}/bin/agent.sh" -- run
+  exec "${TEAMCITY_AGENT_PATH}/bin/agent.sh" run
   
 end script
 
