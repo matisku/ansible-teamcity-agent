@@ -1,0 +1,10 @@
+#/lib/systemd/system
+[Unit]
+Description="TeamCity Agent"
+
+[Service]
+User={{ teamcity_server_user_name }}
+ExecStart={{ teamcity_agent_install_dir }}/bin/agent.sh run
+
+[Install]
+WantedBy=multi-user.target
