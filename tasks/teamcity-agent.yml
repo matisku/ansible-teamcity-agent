@@ -38,11 +38,19 @@
     dest: "/etc/default/teamcity-agent"
     mode: 0644
 
-- name: "Put TeamCity Agent service file"
+- name: "Put TeamCity Agent service file (sysv)"
   template:
     src: "teamcity-agent.conf.j2"
     dest: "/etc/init/teamcity-agent.conf"
     mode: 0644
+  when: "ansible_service_mgr != 'systemd'"
+
+- name: "Put TeamCity Agent service file (systemd)"
+  template:
+    src: "teamcity-agent.service.j2"
+    dest: "/lib/systemd/system/teamcity-agent.service"
+    #mode: 0644
+  when: "ansible_service_mgr == 'systemd'"
 
 - name: "Save agent auth token"
   shell: "grep authorizationToken {{ teamcity_agent_install_dir }}/conf/buildAgent.properties | sed 's/authorizationToken=//g'"
