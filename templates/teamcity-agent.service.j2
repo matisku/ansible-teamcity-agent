@@ -4,7 +4,11 @@ Description="TeamCity Agent"
 
 [Service]
 User={{ teamcity_server_user_name }}
+ExecStartPre=". /etc/default/teamcity-agent"
 ExecStart={{ teamcity_agent_install_dir }}/bin/agent.sh run
+ExecStop={{ teamcity_agent_install_dir }}/bin/agent.sh stop
+RemainAfterExit=yes
+ExecStartPost='while ! tail -5 {{ teamcity_agent_install_dir }}/logs/teamcity-agent.log | grep "Updating agent parameters on the server"; do sleep 1 ; done; exec /usr/bin/curl -sS -X PUT --data "true" -H "Content-Type:text/plain" -u {{ teamcity_server_user_name }}:{{ teamcity_server_user_passwd }} http://{{ teamcity_agent_server_url }}:{{ teamcity_agent_server_port }}/app/rest/agents/{{ teamcity_agent_hostname }}/authorized'
 
 [Install]
 WantedBy=multi-user.target
