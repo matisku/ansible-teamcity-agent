@@ -2,7 +2,7 @@
 teamcity_agent_user: teamcity
 teamcity_agent_group: teamcity
 teamcity_agent_home: /home/teamcity
-teamcity_agent_hostname: "{{ inventory_hostname_short }}"
+teamcity_agent_hostname: "{{ ansible_hostname }}"
 
 teamcity_server_user_name: teamcity
 teamcity_server_user_passwd: teamcity
